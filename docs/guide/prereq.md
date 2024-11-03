@@ -24,11 +24,11 @@ Npm is Node's Package Manager and is, in a sense, Node's equivalent of CRAN, alb
 packer::npm_install("sass", scope = "dev")
 ```
 
-## Webpack
+## Rspack
 
-Webpack is the core of packer, it's what enables modularising JavaScript code, very much like modularising a shiny application: making code more manageable and reusable throughout the application. It is configured from the `webpack.common.js`, `webpack.dev.js`, and `webpack.prod.js` files, different files for different optimisations: `dev` won't be optimal but return clearer error messages, `prod` is optimised for deployment but gives less precise error messages (no sourcemap).
+Rspack is the core of packer, it's what enables modularising JavaScript code, very much like modularising a shiny application: making code more manageable and reusable throughout the application. It is configured from the `rspack.config.js` file which handles both development and production builds - development builds include sourcemaps for clearer error messages while production builds are optimized for deployment.
 
-You can interact with webpack from R with packer using `packer::bundle` to bundle all the files or `packer::watch` to watch for changes in the JavaScript files and re bundles them when things change, ideal while developing the package.
+You can interact with rspack from R with packer using `packer::bundle` to bundle all the files or `packer::watch` to watch for changes in the JavaScript files and re bundles them when things change, ideal while developing the package.
 
 ```r
 # bundle JavaScript files for prod (default)

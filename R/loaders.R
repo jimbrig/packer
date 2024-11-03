@@ -194,7 +194,8 @@ use_loader_framework7 <- function(test = "\\.(f7).(html|js|jsx)$") {
     use = list(
       "babel-loader",
       "framework7-loader"
-    )
+    ),
+    type = "javascript/auto" # rspack specific
   )
 }
 
