@@ -405,13 +405,20 @@ engine_init <- function() {
 #' @noRd
 #' @keywords internal
 engine_add_scripts <- function() {
-  package <- jsonlite::read_json("package.json")
-  package$scripts$none <- "webpack --config webpack.dev.js --mode=none"
-  package$scripts$development <- "webpack --config webpack.dev.js"
-  package$scripts$production <- "webpack --config webpack.prod.js"
-  package$scripts$watch <- "webpack --config webpack.dev.js -d --watch"
-  save_json(package, "package.json")
-  cli::cli_alert_success("Added {.file {engine_get()}} scripts")
+  cli::cli_h2("Adding npm scripts")
+
+  # Get package.json content
+  pkg <- jsonlite::read_json("package.json")
+
+  # Add scripts for rspack
+  pkg$scripts <- list(
+    "watch" = "NODE_ENV=development rspack serve --config rspack.config.js",
+    "build" = "NODE_ENV=production rspack build --config rspack.config.js"
+  )
+
+  # Save
+  save_json(pkg, "package.json")
+  cli::cli_alert_success("Added scripts to {.file package.json}")
 }
 
 #' Engine Update

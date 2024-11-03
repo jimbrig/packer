@@ -18,10 +18,9 @@ ignore_files <- function() {
   usethis::use_build_ignore("node_modules")
   usethis::use_build_ignore("package.json")
   usethis::use_build_ignore("package-lock.json")
-  usethis::use_build_ignore("webpack.dev.js")
-  usethis::use_build_ignore("webpack.prod.js")
-  usethis::use_build_ignore("webpack.common.js")
+  usethis::use_build_ignore("rspack.config.js")
   usethis::use_git_ignore("node_modules")
+  usethis::use_git_ignore(".rspack-cache")
 
   if (engine_get() == "yarn") {
     usethis::use_build_ignore("yarn.lock")
@@ -53,7 +52,7 @@ core_deps_install <- function() {
   if (scaffolded) {
     return()
   }
-  engine_install("webpack", "webpack-cli", "webpack-merge", scope = "dev")
+  engine_install("@rspack/cli", scope = "dev")
 }
 
 # create directory
